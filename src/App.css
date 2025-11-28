@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+:root {
+  --font-family: 'Montserrat', sans-serif;
+}
+body {
+  font-family: var(--font-family);
+}
+
+/* main container */
+.app-background {
+  background-color: #fef8ec; 
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-element {
+  position: absolute;
+  z-index: 0;
+  --tx: 0px;
+  --ty: 0px;
+  --sx: 1;
+  --sy: 1;
+  transform: translate(var(--tx), var(--ty)) scale(var(--sx), var(--sy));
+  will-change: transform;
+}
+
+/* positioning clouds */
+.cloud-1 { /* Top Left */
+    top: 10%;
+    left: 15%;
+    --sx: 0.8;
+    --sy: 0.8;
+}
+
+.cloud-2 { /* Bottom Left */
+    bottom: 25%;
+    left: 5%;
+    --sx: 1.1;
+    --sy: 1.1;
+}
+
+.cloud-3 { /* Bottom Right near card */
+    bottom: 35%;
+    right: 20%;
+}
+
+.cloud-4 { /* Far bottom right */
+    bottom: 10%;
+    right: 5%;
+    --sx: 0.7;
+    --sy: 0.7;
+}
+
+
+@keyframes float-around {
+  0%, 100% {
+    transform: translate(var(--tx), var(--ty)) scale(var(--sx), var(--sy));
+  }
+  25% {
+    transform: translate(calc(var(--tx) + 10px), calc(var(--ty) - 15px)) scale(var(--sx), var(--sy)); /* Up-Right */
+  }
+  50% {
+    transform: translate(calc(var(--tx) - 5px), calc(var(--ty) - 25px)) scale(var(--sx), var(--sy)); /* Up-Left */
+  }
+  75% {
+    transform: translate(calc(var(--tx) - 15px), calc(var(--ty) + 5px)) scale(var(--sx), var(--sy));  /* Down-Left */
+  }
+}
+
+.float-around {
+  animation-name: float-around;
+  animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.sun-cloud-bg { /* sun */
+    top: -12%;
+    right: -7%;
+    --sx: 1.2;
+    --sy: 1.2;
+}
+
+/* main card */
+.weather-card-container {
+    position: relative;
+    z-index: 10; 
+}
+
+@media (max-width: 768px) {
+  .app-background {
+    padding: 1rem;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .cloud-1 {
+    top: -6%;
+    left: -10%;
+    --tx: -8%;
+    --ty: -4%;
+    
+  }
+
+  .cloud-2 {
+    bottom: 18%;
+    left: -8%;
+    --tx: -6%;
+    --ty: 6%;
+  }
+
+  .cloud-3 {
+    bottom: 24%;
+    right: -12%;
+    --tx: 10%;
+    --ty: 6%;
+  }
+
+  .cloud-4 {
+    display: none;
+  }
+
+  .sun-cloud-bg {
+    top: -10%;
+    right: -8%;
+    --tx: 4%;
+    --ty: -6%;
+    opacity: 0.95;
+  }
+}
+
+@media (max-width: 480px) {
+  .cloud-1 {
+    top: 5%;
+    left: -6%;
+    --tx: -12%;
+    --ty: -6%;
+  }
+
+  .cloud-2 {
+    bottom: -10%;
+    left: -6%;
+    --tx: -10%;
+    --ty: 8%;
+  }
+
+  .cloud-3 {
+    bottom: 10%;
+    right: -65%;
+    --sx: -1;
+    --tx: 14%;
+    --ty: 8%;
+  }
+
+  .sun-cloud-bg {
+    top: -12%;
+    right: -10%;
+    --tx: 10%;
+    --ty: -8%;
+  }
+}
