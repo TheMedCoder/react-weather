@@ -15,7 +15,6 @@ function MainWeather() {
                     <span role="img" aria-label="cloud" className="absolute bottom-58 self-center z-0" style={{ fontSize: 75 }}>☁️</span>
                 ) : null}
                 <h1 className="relative text-4xl font-bold text-slate-600 z-10 [-webkit-text-stroke:8px_#dff2fe] [paint-order:stroke_fill]">{currentCity}</h1>
-                {}
                 <p className="text-2xl text-slate-600">{currentTemp}°{currentWeatherUnit}</p>
                 <p className="text-xl text-slate-600">
                     {isSunny ? "Sunny" : isCloudy ? "Cloudy" : ""}

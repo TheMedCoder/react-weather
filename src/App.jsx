@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 import "iconify-icon";
 import CloudSvg from "./components/background/CloudSvg";
@@ -6,6 +7,7 @@ import Forecast from "./components/Forecast";
 import MainWeather from "./components/MainWeather";
 import Header from "./components/Header";
 import { getWeatherByCity } from "./services/weatherService";
+import { useWeather } from "./context/WeatherContext";
 
 function getRandomFloat(min, max) {
   return (Math.random() * (max - min) + min).toFixed(2);
@@ -19,8 +21,17 @@ function getRandomStyle() {
 }
 
 function App() {
-    getWeatherByCity("Dubai");
-    getWeatherByCity("Tokyo");
+  const { setCurrentTemp, setCurrentCity, setWeatherCode, setDailyForecast } = useWeather();
+
+  useEffect(() => {
+    getWeatherByCity("London").then((data) => {
+       setCurrentTemp(data.current.temperature);
+       setWeatherCode(data.current.weathercode);
+       setCurrentCity("London");
+       setDailyForecast(data.daily);
+    }).catch(err => console.error(err));
+  }, []);
+
   return (
     
     <div className="app-background">

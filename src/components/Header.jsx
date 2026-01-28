@@ -4,7 +4,7 @@ import { useWeather } from "../context/WeatherContext";
 
 function Header() {
   const inputRef = useRef(null);
-  const { setCurrentTemp, setCurrentCity, setWeatherCode } = useWeather();
+  const { setCurrentTemp, setCurrentCity, setWeatherCode, setDailyForecast } = useWeather();
 
   const handleSubmit = () => {
     const city = inputRef.current?.value || "";
@@ -15,6 +15,7 @@ function Header() {
           setCurrentTemp(data.current.temperature);
           setWeatherCode(data.current.weathercode);
           setCurrentCity(city);
+          setDailyForecast(data.daily);
         })
         .catch((error) => {
           console.error("Error fetching weather for", city, ":", error);
